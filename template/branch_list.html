@@ -1,0 +1,51 @@
+<!-- {%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css'%}">
+    <title>branches</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">brranches</li>
+        </ol>
+      </nav>
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <th>branche name</th>
+          <th>branche address</th>
+          <th>branche phone</th>
+          <th>branche email</th>
+          <th>branche department count</th>
+        </thead>
+        <tbody>
+          {%for branche in Branches%}
+          <tr>
+            <td>{{branche.name}}</td>
+            <td>{{branche.address}}</td>
+            <td>{{branche.phone}}</td>
+            <td>{{branche.email}}</td>
+            <td>0</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html> -->
+{% extends "base.html" %} {% block content %}
+<h2>Branches</h2>
+<a href="{% url 'branch-create' %}">Add New Branch</a>
+<ul>
+  {% for branch in branches %}
+  <li>
+    {{ branch.name }} ({{ branch.location }}) - Manager: {{ branch.manager }}
+    <a href="{% url 'branch-edit' branch.pk %}">Edit</a> |
+    <a href="{% url 'branch-delete' branch.pk %}">Delete</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
