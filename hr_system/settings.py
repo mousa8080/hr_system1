@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'widget_tweaks',
     'drf_spectacular',
-    'drf_spectacular_sidecar', 
+    'drf_spectacular_sidecar',
+    "whitenoise.runserver_nostatic", 
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -122,7 +125,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
